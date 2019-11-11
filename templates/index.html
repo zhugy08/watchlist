@@ -3,17 +3,22 @@
     <head>
         <meta charset='utf-8'>
         <title>{{ name }}'s watchlist</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+        <link rel="icon" href="{{ url_for('static', filename='favicon-32x32.png') }}">
     </head>
     <body>
-        <h2>{{ name }}'s watch list</h2>
+        <h2>
+            <img alt='Avatar' class="avatar" src="{{ url_for('static', filename='images/avatar.png') }}">
+            {{ name }}'s watch list</h2>
         {# 使用length过滤movies的长度 #}
         <p>{{ movies|length }} Titles</p>
-        <ul>
+        <ul class="movie-list">
             {% for movie in movies %}
             <li>{{ movie.title }} - {{ movie.year }}</li>
             {% endfor %}
         </ul>
         <footer>
+            <img alt='Walking Totoro' class="totoro" src="{{ url_for('static', filename='images/totoro.gif') }}">
             <small>&copy; 2018 <a href="http://helloflask.com/tutorial">HelloFlask</a></small>
         </footer>
     </body>
