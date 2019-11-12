@@ -8,10 +8,11 @@ from flask_login import UserMixin, login_user, login_required, logout_user, curr
 app = Flask(__name__)
 
 #Initialize Database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////'+os.path.join(app.root_path, 'data.db')
+prefix = 'sqlite:////'
+app.config['SQLALCHEMY_DATABASE_URI'] = prefix+os.path.join(os.path.dirname(app.root_path), os.getenv('DATABASE_FILE','data.db'))
 db = SQLAlchemy(app)
 
-app.config['SECRET_KEY'] = 'dev'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev')
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
